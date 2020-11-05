@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import LeftSide from "./components/leftSide/LeftSide";
+import RightSide from "./components/rightSide/RightSide";
 
-function App() {
+const App = () => {
+    const [number, setNumber] = useState(1);
+    const nextPage = () => {
+        if (number < 3){
+            setNumber(number + 1);
+        }
+    };
+
+    const previousPage = () => {
+        if (number !== 1 && number !== 0){
+            setNumber(number - 1);
+        }
+    };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <LeftSide pageNumber={number}/>
+        <RightSide pageNumber={number} previousPage={previousPage} nextPage={nextPage} />
+      </div>
   );
 }
 
