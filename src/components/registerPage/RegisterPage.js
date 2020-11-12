@@ -56,6 +56,11 @@ const RegisterPage = (props) => {
         styleIcon: {
             fontSize: "14px",
             paddingLeft: "5px"
+        },
+
+        styleInputRange: {
+            width: "100%",
+            marginTop: "50px"
         }
     }
 
@@ -97,27 +102,30 @@ const RegisterPage = (props) => {
                 <div style={styles.nameDiv}>
                     <div>
                         <p>From</p>
-                        <input key="4" type="text" style={styles.inputName} value={props.investment.min} />
+                        <input key="4" type="text" style={styles.inputName} defaultValue={props.investment.min} />
                     </div>
                     <div>
                         <p>To</p>
-                        <input key="5" type="text" style={styles.inputName} onChange={(e) => props.changeInvest(e)}/>
+                        <input key="5" type="text" style={styles.inputName} value={props.investment.current} onChange={(e) => props.changeInvest(e)} />
                     </div>
                 </div>
-                <input type="range" min={props.investment.min} max={props.investment.max} value={props.investment.current} style={
-                    {
-                        width: "100%"
-                    }
-                }/>
+                <input
+                    type="range" min={props.investment.min}
+                    value={props.investment.current.length === 0? 10000: props.investment.current}
+                    max={props.investment.max} style={styles.styleInputRange}
+                    step={10000}
+                    onInput={(e) => props.changeInvest(e)}
+                    onChange={(e) => props.changeInvest(e)}
+                />
 
                 <h3>Are you an accredited investor?</h3>
                 <div>
                     <div>
-                        <input type="checkbox"/>
+                        <input type="radio"/>
                         <span>Yes</span>
                     </div>
                     <div>
-                        <input type="checkbox"/>
+                        <input type="radio"/>
                         <span>No</span>
                     </div>
                 </div>

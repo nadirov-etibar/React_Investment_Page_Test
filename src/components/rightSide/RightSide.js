@@ -64,13 +64,13 @@ const RightSide = (props) => {
 
     let changeInvest = (e) => {
         let invest = {...investment};
-        if (e.target.value > invest.min){
+        // if (e.target.value > invest.min){
             invest["current"] = e.target.value;
-        }
+        // }
 
-        else if (e.target.value < invest.min){
-            invest["current"] = invest.min
-        }
+        // else if (e.target.value < invest.min){
+        //     invest["current"] = 10000
+        // }
         setInvestment(invest);
     }
 
