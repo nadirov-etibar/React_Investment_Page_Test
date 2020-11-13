@@ -60,7 +60,38 @@ const RegisterPage = (props) => {
 
         styleInputRange: {
             width: "100%",
-            marginTop: "50px"
+            marginTop: "50px",
+            marginBottom: "50px"
+        },
+
+        styleCheckParentDiv: {
+            display: "flex"
+        },
+
+        styleCheckDiv: {
+            width: "80px",
+            height: "25px",
+            border:  "1px solid gray",
+            display: "flex",
+            alignContent: "center",
+            alignItems: "center",
+            marginRight: "20px",
+        },
+
+        styleCheckedDiv: {
+            width: "80px",
+            height: "25px",
+            border:  "1px solid blue",
+            display: "flex",
+            alignContent: "center",
+            alignItems: "center",
+            marginRight: "20px",
+            color: "blue"
+        },
+
+        styleCheckInput: {
+            marginRight: "15px",
+            marginTop: 0
         }
     }
 
@@ -97,7 +128,7 @@ const RegisterPage = (props) => {
         return (
             <div style={styles.mainDiv}>
                 <h1>Investment plans</h1>
-                <p>Let us know about your investment plans. This will help us get you to the right expert who will help you further</p>
+                <p style={{...styles.colorGray, marginBottom: "50px"}}>Let us know about your investment plans. This will help us get you to the right expert who will help you further</p>
                 <h3>How much are you planning to invest in this year?</h3>
                 <div style={styles.nameDiv}>
                     <div>
@@ -106,28 +137,30 @@ const RegisterPage = (props) => {
                     </div>
                     <div>
                         <p>To</p>
-                        <input key="5" type="text" style={styles.inputName} value={props.investment.current} onChange={(e) => props.changeInvest(e)} />
+                        <input key="5" type="text" style={styles.inputName} value={props.investment.current === 10000? "": props.investment.current} onChange={(e) => props.changeInvest(e)} />
                     </div>
                 </div>
                 <input
-                    type="range" min={props.investment.min}
+                    type="range"
+                    style={styles.styleInputRange}
+                    min={props.investment.min}
                     value={props.investment.current.length === 0? 10000: props.investment.current}
-                    max={props.investment.max} style={styles.styleInputRange}
+                    max={props.investment.max}
                     step={10000}
                     onInput={(e) => props.changeInvest(e)}
                     onChange={(e) => props.changeInvest(e)}
                 />
 
                 <h3>Are you an accredited investor?</h3>
-                <div>
-                    <div>
-                        <input type="radio"/>
+                <div style={styles.styleCheckParentDiv}>
+                    <label htmlFor="yes" style={props.checked.yes ? styles.styleCheckedDiv : styles.styleCheckDiv} onClick={(e) => props.changeChecked(e)}>
+                        <input type="radio" style={styles.styleCheckInput} defaultChecked={props.checked.yes} name="yn" id="yes"/>
                         <span>Yes</span>
-                    </div>
-                    <div>
-                        <input type="radio"/>
+                    </label>
+                    <label htmlFor="no" style={props.checked.no ? styles.styleCheckedDiv : styles.styleCheckDiv} onClick={(e) => props.changeChecked(e)}>
+                        <input type="radio" style={styles.styleCheckInput} defaultChecked={props.checked.no} name="yn" id="no" />
                         <span>No</span>
-                    </div>
+                    </label>
                 </div>
             </div>
         );

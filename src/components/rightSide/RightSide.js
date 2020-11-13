@@ -35,11 +35,14 @@ const RightSide = (props) => {
             value: "Israel"
         }
     ]
-
     const [investment, setInvestment] = useState({
         min: 10000,
         max: 1000000,
         current: 10000
+    })
+    const [checked, setChecked] = useState({
+        yes: false,
+        no: false
     })
 
     let changeName = (e) => {
@@ -64,14 +67,30 @@ const RightSide = (props) => {
 
     let changeInvest = (e) => {
         let invest = {...investment};
-        // if (e.target.value > invest.min){
             invest["current"] = e.target.value;
-        // }
 
-        // else if (e.target.value < invest.min){
-        //     invest["current"] = 10000
-        // }
-        setInvestment(invest);
+            setInvestment(invest);
+    }
+
+    let changeChecked = (e) => {
+        if (e.target.attributes.id !== undefined){
+            if (e.target.attributes.id.value === "yes"){
+                let check = {
+                    yes: true,
+                    no: false
+                }
+                setChecked(check)
+            }
+
+            if (e.target.attributes.id.value === "no"){
+                let check = {
+                    yes: false,
+                    no: true
+                }
+                setChecked(check);
+            }
+        }
+        // console.log(checked);
     }
 
     const styleMainDiv = {
@@ -93,12 +112,14 @@ const RightSide = (props) => {
                 changeEmail={changeEmail}
                 changeCountry={changeCountry}
                 changeInvest={changeInvest}
+                changeChecked={changeChecked}
                 name={name}
                 number={number}
                 email={email}
                 country={country}
                 countries={countries}
                 investment={investment}
+                checked={checked}
             />
             <Footer
                 pageNumber={props.pageNumber}
